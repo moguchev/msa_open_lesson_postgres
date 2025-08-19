@@ -1,0 +1,40 @@
+# Подробнее: https://bob.stephenafamo.com/docs/code-generation/psql#driver-configuration
+psql:
+  dsn: "postgres://example_user:example_password@127.0.0.1:5432/example?sslmode=disable"
+  driver: "github.com/jackc/pgx/v5/stdlib"
+  schemas:
+    - "public"
+  uuid_pkg: "google"
+  except:
+    goose_db_version: []
+  queries:
+    - ./internal/repository/users/bob/sql
+
+# Подробнее: https://bob.stephenafamo.com/docs/code-generation/configuration#plugins-configuration
+plugins:
+  dbinfo: # Генерирует код для получения информации о каждой базе данных: схемах, таблицах, столбцах, индексах, первичных ключах, внешних ключах, уникальных ограничениях и проверочных ограничениях.
+    disabled: false
+    pkgname: "dbinfo"
+    destination: "internal/gen/bob/dbinfo"
+  enums: # Генерирует код для перечислений в отдельном пакете, если таковые имеются.
+    disabled: false
+    pkgname: "enums"
+    destination: "internal/gen/bob/enums"
+  models: # Генерирует код для моделей. Зависит от перечислений.
+    disabled: false
+    pkgname: "schema"
+    destination: "internal/gen/bob/schema"
+  factory: # Генерирует код для фабрик. Зависит от моделей.
+    disabled: false
+    pkgname: "factory"
+    destination: "internal/gen/bob/factory"
+  dberrors: # Генерирует код для ошибок уникальных ограничений. Зависит от моделей.
+    disabled: false
+    pkgname: "dberrors"
+    destination: "internal/gen/bob/dberrors"
+  where: # Добавляет шаблоны в пакет моделей для генерации кода для предложений WHERE, например
+    disabled: false
+  loaders: # Добавляет шаблоны в пакет моделей для генерации кода для загрузчиков, например models.SelectThenLoad.Table.Rel()
+    disabled: false
+  joins:
+    disabled: false

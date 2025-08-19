@@ -1,0 +1,31 @@
+version: "3.9"
+
+networks:
+  postgresql:
+    driver: bridge
+
+services:
+  # PostgreSQL database
+  postgresql:
+    image: postgres:17.6 # Версия PostgreSQL
+    container_name: 'postgresql-example'
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - ./config/postgres.conf:/etc/postgresql/postgresql.conf # конфиг БД
+      - ./docker/postgresql/data:/var/lib/postgresql/data # том для того, чтобы при перезапуске контейнера все данные сохранялись
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - postgresql

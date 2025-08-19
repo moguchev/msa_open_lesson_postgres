@@ -5,7 +5,9 @@ go 1.25.0
 tool github.com/stephenafamo/bob/gen/bobgen-psql
 
 require (
+	github.com/Masterminds/squirrel v1.5.4
 	github.com/aarondl/opt v0.0.0-20250607033636-982744e1bd65
+	github.com/georgysavva/scany/v2 v2.1.4
 	github.com/google/go-cmp v0.7.0
 	github.com/google/uuid v1.6.0
 	github.com/jackc/pgx/v5 v5.7.5
@@ -34,6 +36,8 @@ require (
 	github.com/knadh/koanf/providers/env v0.1.0 // indirect
 	github.com/knadh/koanf/providers/file v0.1.0 // indirect
 	github.com/knadh/koanf/v2 v2.1.0 // indirect
+	github.com/lann/builder v0.0.0-20180802200727-47ae307949d0 // indirect
+	github.com/lann/ps v0.0.0-20150810152359-62de8c46ede0 // indirect
 	github.com/lib/pq v1.10.9 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect

@@ -14,6 +14,7 @@ import (
 	"github.com/moguchev/msa_open_lesson_postgres/internal/models"
 	"github.com/moguchev/msa_open_lesson_postgres/internal/models/pagination"
 	users_repo_bob "github.com/moguchev/msa_open_lesson_postgres/internal/repository/users/bob"
+	users_repo_native "github.com/moguchev/msa_open_lesson_postgres/internal/repository/users/native"
 )
 
 var (
@@ -52,6 +53,9 @@ func main() {
 
 	repo1 := users_repo_bob.NewRepository(pool)
 	DemoUsersRepositoryUsage(repo1)
+
+	repo2 := users_repo_native.NewRepository(pool)
+	DemoUsersRepositoryUsage(repo2)
 }
 
 type UsersRepository interface {
